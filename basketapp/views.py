@@ -26,9 +26,7 @@ def basket_add(request, product_id=None):
 def basket_remove(request, id):
     if request.is_ajax():
         Basket.objects.get(id=id).delete()
-        baskets = Basket.objects.filter(user=request.user)
-        context = {'baskets': baskets}
-        return JsonResponse({'result': render_to_string('basketapp/basket.html', context)})
+        return JsonResponse({'result': render_to_string('basketapp/basket.html')})
 
 
 @login_required
@@ -40,6 +38,6 @@ def basket_edit(request, id, quantity):
             basket.save()
         else:
             basket.delete()
-        baskets = Basket.objects.filter(user=request.user)
-        context = {'baskets': baskets}
-        return JsonResponse({'result': render_to_string('basketapp/basket.html', context)})
+        # baskets = Basket.objects.filter(user=request.user)
+        # context = {'baskets': baskets}
+        return JsonResponse({'result': render_to_string('basketapp/basket.html')})
