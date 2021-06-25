@@ -55,9 +55,6 @@ def profile(request):
     if request.method == 'POST':
         form = UserProfileForm(data=request.POST, files=request.FILES, instance=request.user)
         profile_form = UserProfileEditForm(data=request.POST, instance=request.user.userprofile)
-        if not form.is_valid():
-            for err in form.errors:
-                print(err)
         if form.is_valid() and profile_form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('users:profile'))
