@@ -4,7 +4,8 @@ window.onload = function () {
         $.ajax({
             url: "/baskets/edit/" + t_href.name + "/" + t_href.value + "/",
             success: function (data) {
-                $('.basket_list').html(data.result);
+                // $('.basket_list').html(data.result);
+                location.reload();
             }
         });
         event.preventDefault();
@@ -15,7 +16,8 @@ window.onload = function () {
         $.ajax({
             url: "/baskets/remove/" + t_href.id + "/",
             success: function (data) {
-                $('.basket_list').html(data.result);
+                location.reload();
+                // $('.basket_list').html(data.result);
             }
         });
         event.preventDefault();
