@@ -2,7 +2,7 @@ import hashlib
 from random import random
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
-from authapp.models import User
+from authapp.models import User, UserProfile
 from django import forms
 
 
@@ -55,3 +55,14 @@ class UserProfileForm(UserChangeForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'first_name', 'last_name', 'image')
+
+
+class UserProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('tagline', 'about_me', 'gender')
+
+    def __init__(self, *args, **kwargs):
+        super(UserProfileEditForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control py-4'
