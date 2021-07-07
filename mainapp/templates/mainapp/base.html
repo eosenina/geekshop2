@@ -42,6 +42,9 @@
                             <i class="fas fa-user-circle"></i>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'order:list' %}">Заказы</a>
+                    </li>
                     {% if user.is_staff or user.is_superuser %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'admin_staff:index' %}">
