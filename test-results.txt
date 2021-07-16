@@ -1,0 +1,28 @@
+	До:			                                            После:
+адрес	            время   число запросов  число дублей    время	число запросов	число дублей
+/users/profile/	    12.78	17	            14	            7.91	11	            7
+/	                5.41	3	            0	            -	    -	            -
+/products/	        5.31	6	            0	            -	    -	            -
+/orders/	        4.54	4	            0	            -	    -	            -
+/orders/read/3/	    8.71	7	            3
+/orders/update/3/	26.06	54	            44	            15.46   18	            8
+
+
+
+(venv) root@194-67-92-152:/home/django/geekshop2# siege -f test-urls.txt -d1 -r10 -c2
+** SIEGE 4.0.4
+** Preparing 2 concurrent users for battle.
+The server is now under siege...
+Transactions:		         265 hits
+Availability:		       99.62 %
+Elapsed time:		       10.36 secs
+Data transferred:	       41.01 MB
+Response time:		        0.04 secs
+Transaction rate:	       25.58 trans/sec
+Throughput:		        3.96 MB/sec
+Concurrency:		        0.97
+Successful transactions:         265
+Failed transactions:	           1
+Longest transaction:	        1.02
+Shortest transaction:	        0.00
+
