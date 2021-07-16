@@ -1,6 +1,3 @@
-http://194.67.92.152
-http://194.67.92.152/login/ POST username=admin&password=pass
+http://194.67.92.152/users/login/ POST username=admin&password=pass
 http://194.67.92.152/orders/
 http://194.67.92.152/products/
-
-
