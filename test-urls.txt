@@ -1,0 +1,6 @@
+http://194.67.92.152
+http://194.67.92.152/users/profile/
+http://194.67.92.152/orders/
+http://194.67.92.152/products/
+
+
