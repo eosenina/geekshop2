@@ -38,7 +38,7 @@ class Basket(models.Model):
 
     @property
     def total_sum(self):
-        return sum(list(map(lambda bask: bask.final_price, Basket.objects.filter(user=self.user))))
+        return sum(list(map(lambda bask: bask.final_price, Basket.objects.filter(user=self.user).select_related('product'))))
 
     @staticmethod
     def get_item(pk):
