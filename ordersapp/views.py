@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.db.models.signals import pre_save, pre_delete
 from django.dispatch import receiver
@@ -14,6 +15,7 @@ from ordersapp.forms import OrderItemEditForm
 from ordersapp.models import Order, OrderItem
 
 
+@login_required
 class OrderList(ListView):
     model = Order
 
@@ -21,6 +23,7 @@ class OrderList(ListView):
         return Order.objects.filter(user=self.request.user, is_active=True)
 
 
+@login_required
 class OrderCreate(CreateView):
     model = Order
     fields = []
@@ -33,10 +36,10 @@ class OrderCreate(CreateView):
         if self.request.POST:
             formset = OrderFormSet(self.request.POST)
         else:
-            basket_items = Basket.objects.filter(user=self.request.user)
+            basket_items = Basket.objects.filter(user=self.request.user).select_related()
             if len(basket_items):
                 OrderFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemEditForm, extra=len(basket_items))
-                formset = OrderFormSet()
+                formset = OrderFormSet(instance=self.object, queryset=basket_items)
                 for num, form in enumerate(formset.forms):
                     form.initial['product'] = basket_items[num].product
                     form.initial['quantity'] = basket_items[num].quantity
@@ -65,6 +68,7 @@ class OrderCreate(CreateView):
         return super().form_valid(form)
 
 
+@login_required
 class OrderUpdate(UpdateView):
     model = Order
     fields = []
@@ -101,15 +105,18 @@ class OrderUpdate(UpdateView):
         return super().form_valid(form)
 
 
+@login_required
 class OrderDelete(DeleteView):
     model = Order
     success_url = reverse_lazy('order:list')
 
 
+@login_required
 class OrderRead(DetailView):
     model = Order
 
 
+@login_required
 def forming_complete(request, pk):
     order = get_object_or_404(Order, pk=pk)
     order.status = Order.SENT_TO_PROCEED
