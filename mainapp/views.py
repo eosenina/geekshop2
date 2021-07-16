@@ -1,7 +1,8 @@
+import json
+import os
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from mainapp.models import ProductCategory, Product
-# Create your views here.
 
 
 def index(request):

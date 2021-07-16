@@ -1,0 +1,122 @@
+    1  logout
+    2  cd /home/django
+    3  systemctl status gunicorn
+    4  systemctl start gunicorn
+    5  systemctl status gunicorn
+    6  cd geekshop2/
+    7  systemctl status gunicorn
+    8  systemctl start gunicorn
+    9  systemctl status gunicorn
+   10  chown -R django /home/django/
+   11  systemctl start gunicorn
+   12  systemctl status gunicorn
+   13  nano /etc/nginx/sites-available/geekshop
+   14  fg
+   15  ln -s /etc/nginx/sites-available/geekshop /etc/nginx/sites-enabled/
+   16  nano /etc/nginx/sites-enabled
+   17  ls - la /etc/nginx/
+   18  ls - la /etc/nginx/sites-available/
+   19  cd /etc/nginx/sites-available/
+   20  ls
+   21  cat default 
+   22  rm default 
+   23  ls
+   24  exit
+   25  ssh-keygen
+   26  cat /root/.ssh/id_rsa.pub
+   27  apt update
+   28  apt install nginx
+   29  apt install postgresql postgresql-contrib
+   30  apt install python3-venv
+   31  nano /etc/postgresql/12/main/pg_hba.conf 
+   32  systemctl restart postgresql
+   33  systemctl status postgresql
+   34  useradd -g www-data -m django
+   35  cd /home/django/
+   36  git clone git@github.com:eosenina/geekshop2.git
+   37  ls -la
+   38  python3 -m venv venv
+   39  source venv/bin/activate
+   40  mc
+   41  ls -la
+   42  cd geekshop2/
+   43  ls
+   44  pip3 install -r requirements.txt 
+   45  pip3 freeze
+   46  git checkout -b lesson5 origin/lesson5
+   47  pip3 install -r requirements.txt 
+   48  pip3 freeze
+   49  pip3 install gunicorn
+   50  psql -U postgres
+   51  python3 manage.py migrate
+   52  ls
+   53  cd /home/django/
+   54  cd geekshop2/
+   55  cd ..
+   56  sourse /venv/bin/activate
+   57  source /venv/bin/activate
+   58  ls
+   59  source venv/bin/activate
+   60  ./fill_db
+   61  cd geekshop2/
+   62  ls
+   63  ./fill_db
+   64  python3 manage.py runserver
+   65  python3 manage.py runserver 0.0.0.0:8000
+   66  nano /etc/systemd/system/gunicorn.service
+   67  ls -la
+   68  nano /etc/systemd/system/gunicorn.service
+   69  cd ..
+   70  ls -la
+   71  cd venv
+   72  ls -la
+   73  ls -la bin/
+   74  cd ..
+   75  nano /etc/systemd/system/gunicorn.service
+   76  cd /home/django/
+   77  cd geekshop2/
+   78  nginx -t
+   79  /etc/nginx/sites-enabled
+   80  /etc/nginx/sites-enabled/
+   81  ls /etc/nginx/sites-enabled/
+   82  nginx -t
+   83  systemctl restart nginx
+   84  systemctl status nginx.service
+   85  systemctl status gunicorn
+   86  systemctl status nginx
+   87  systemctl start nginx
+   88  ln -s /etc/nginx/sites-available/geekshop /etc/nginx/sites-enabled/
+   89  nano /etc/nginx/sites-available/geekshop 
+   90  nano /etc/nginx/nginx.conf
+   91  cat /etc/nginx/sites-enabled/default
+   92  ls /etc/nginx/sites-enabled/
+   93  ls -la /etc/nginx/sites-enabled/
+   94  cd /etc/nginx/sites-enabled/
+   95  ls ?
+   96  help ls
+   97  info ls
+   98  ls -l
+   99  unlink default 
+  100  info ls
+  101  ls -l
+  102  systemctl start nginx
+  103  systemctl status nginx
+  104  cd .
+  105  cd /home/django/geekshop2/
+  106  nginx -t
+  107  hystory
+  108  history
+  109  cd ..
+  110  history
+  111  echo $HISTSIZE
+  112  echo $HISTFILE
+  113  cat /root/.bash_history
+  114  history
+  115  shopt -s
+  116  ls -l /root/.bash_history
+  117  chmod 0644 /root/.bash_history
+  118  history
+  119  history > /tmp/hist1.txt
+  120  logout
+  121  history
+  122  history > /tmp/hist1.txt
