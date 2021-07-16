@@ -63,7 +63,7 @@ def profile(request):
         profile_form = UserProfileEditForm(instance=request.user.userprofile)
     content = {'title': 'GeekShop - Личный кабинет',
                'form': form,
-               'baskets': Basket.objects.filter(user=request.user).select_related('product'),
+               'baskets': Basket.objects.filter(user=request.user).select_related(),
                'profile_form': profile_form
                }
     return render(request, 'authapp/profile.html', content)
