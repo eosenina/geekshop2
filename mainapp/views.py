@@ -3,6 +3,8 @@ from django.core.cache import cache
 import os
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.decorators.cache import cache_page
+
 from mainapp.models import ProductCategory, Product
 
 
@@ -33,6 +35,7 @@ def get_products():
 def index(request):
     context = {'title': 'Geekshop'}
     return render(request, 'mainapp/index.html', context)
+
 
 @cache_page(3600)
 def products(request, category_id=None, page=1):
