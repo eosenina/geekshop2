@@ -34,7 +34,7 @@ def index(request):
     context = {'title': 'Geekshop'}
     return render(request, 'mainapp/index.html', context)
 
-
+@cache_page(3600)
 def products(request, category_id=None, page=1):
     prod_list = get_products()
     if category_id:
