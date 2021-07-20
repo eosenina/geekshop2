@@ -18,13 +18,28 @@ def get_categories():
         return ProductCategory.objects.all()
 
 
+def get_products():
+    if settings.LOW_CACHE:
+        key = 'products'
+        prod_list = cache.get(key)
+        if prod_list is None:
+            prod_list = Product.objects.all()
+            cache.set(key, prod_list)
+        return prod_list
+    else:
+        return Product.objects.all()
+
+
 def index(request):
     context = {'title': 'Geekshop'}
     return render(request, 'mainapp/index.html', context)
 
 
 def products(request, category_id=None, page=1):
-    prod_list = Product.objects.filter(category_id=category_id) if category_id else Product.objects.all()
+    prod_list = get_products()
+    if category_id:
+        prod_list = prod_list.filter(category_id=category_id)
+    # prod_list = Product.objects.filter(category_id=category_id) if category_id else Product.objects.all()
     paginator = Paginator(prod_list, per_page=3)
     try:
         prod_paginator = paginator.page(page)
