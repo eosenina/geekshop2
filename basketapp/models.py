@@ -35,18 +35,18 @@ class Basket(models.Model):
 
     @property
     def total_quantity(self):
-        items = self.get_items_cached
+        # items = self.get_items_cached
         total_count = 0
-        # for bask in Basket.objects.filter(user=self.user):
-        for bask in items:
+        for bask in Basket.objects.filter(user=self.user):
+        # for bask in items:
             total_count += bask.quantity
         return total_count
 
     @property
     def total_sum(self):
-        items = self.get_items_cached
-        return sum(list(map(lambda bask: bask.final_price, items)))
-        # return sum(list(map(lambda bask: bask.final_price, Basket.objects.filter(user=self.user).select_related('product'))))
+        # items = self.get_items_cached
+        # return sum(list(map(lambda bask: bask.final_price, items)))
+        return sum(list(map(lambda bask: bask.final_price, Basket.objects.filter(user=self.user).select_related('product'))))
 
     @staticmethod
     def get_item(pk):
