@@ -1,6 +1,6 @@
-from functools import reduce
-
 from django.db import models
+from django.utils.functional import cached_property
+
 from authapp.models import User
 from mainapp.models import Product
 
@@ -17,7 +17,7 @@ class BasketQuerySet(models.QuerySet):
 class Basket(models.Model):
     objects = BasketQuerySet.as_manager()
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="basket")
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=0)
     created_timestamp = models.DateTimeField(auto_now_add=True)
@@ -25,19 +25,27 @@ class Basket(models.Model):
     def __str__(self):
         return f'Корзина для {self.user.username} | Продукт {self.product.name}'
 
+    @cached_property
+    def get_items_cached(self):
+        return self.user.basket.select_related()
+
     @property
     def final_price(self):
         return self.quantity * self.product.price
 
     @property
     def total_quantity(self):
+        # items = self.get_items_cached
         total_count = 0
         for bask in Basket.objects.filter(user=self.user):
+        # for bask in items:
             total_count += bask.quantity
         return total_count
 
     @property
     def total_sum(self):
+        # items = self.get_items_cached
+        # return sum(list(map(lambda bask: bask.final_price, items)))
         return sum(list(map(lambda bask: bask.final_price, Basket.objects.filter(user=self.user).select_related('product'))))
 
     @staticmethod
